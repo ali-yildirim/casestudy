@@ -43,11 +43,6 @@ def test_object_creation(test_data):
     assert isinstance(hotel.location, str), f"Location should be a string, got {type(hotel.location)}"
     print("Hotel.from_dict test passed")
     
-
-
-
-
-
 def test_DataProcessorClass(test_data):
 
     print("Testing DataProcessorClass...")
@@ -127,9 +122,6 @@ def test_DataMigrationClass(test_data):
     
 
 
-
-
-    
 def run_tests(test_data):
     test_object_creation(test_data)
     test_DataProcessorClass(test_data)

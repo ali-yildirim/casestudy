@@ -1,8 +1,6 @@
 
 from dataclasses import dataclass
 from typing import Any, Dict, Optional
-import os
-import json
 
 @dataclass
 class Category:
