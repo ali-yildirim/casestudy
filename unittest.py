@@ -120,6 +120,36 @@ def test_DataMigrationClass(test_data):
     print("DataMigrationClass test passed")
 
     
+def test_linking_from_id(chain_id, category_id, test_data):
+
+    db_config = {
+        'host': os.environ.get('DB_HOST', 'localhost'),
+        'port': os.environ.get('DB_PORT', '3307'),
+        'database': os.environ.get('DB_NAME', 'mydb'),
+        'user': os.environ.get('DB_USER', 'root'),
+        'password': os.environ.get('DB_PASSWORD', 'secret')
+                    }
+
+    data_processor = DataProcessorClass()
+    db_connector = DatabaseConnector(db_config)
+    db_connector.connect()
+
+    data = data_processor.process_json_file(test_data)
+
+    for item in data:
+        # Hotel object
+        hotel = Hotel.from_dict(item)
+
+    cursor = db_connector.connection.cursor()
+    
+    category_name, chain_name = hotel.field_from_id(chain_id, category_id, cursor)
+
+    cursor.close()
+    db_connector.disconnect()
+
+    assert category_name == "Test_Category", f"Expected category name 'Test_Category', got {category_name}"
+    assert chain_name == "Test_Chain", f"Expected chain name 'Test_Chain', got {chain_name}"
+    print("Hotel.field_from_id test passed")
 
 
 def run_tests(test_data):
@@ -127,7 +157,10 @@ def run_tests(test_data):
     test_DataProcessorClass(test_data)
     test_DatabaseConnector()
     test_DataMigrationClass(test_data)
+    test_linking_from_id(chain_id="0", category_id="1", test_data=test_data)
     print("All tests passed")
 
 if __name__ == "__main__":
     run_tests(VALID_DATA)
+
+

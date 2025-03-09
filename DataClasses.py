@@ -52,3 +52,12 @@ class Hotel:
         )
 
 
+    @classmethod
+    def field_from_id(cls, chain_id, category_id, cursor):
+        query = "SELECT name FROM Category WHERE id = %s"
+        cursor.execute(query, (category_id,))
+        category_name = cursor.fetchone()[0]
+        query = "SELECT name FROM _Chain_ WHERE id = %s"
+        cursor.execute(query, (chain_id,))
+        chain_name = cursor.fetchone()[0]
+        return category_name, chain_name

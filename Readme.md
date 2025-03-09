@@ -45,16 +45,27 @@ This command will run the script necessary for unit testing
 - Tables have fields stated in the case study file:
 
 Category Table: 
+
 • Category ID 
+
 • Category Name 
+
 Chain Table: 
+
 • Chain ID 
+
 • Chain Name 
+
 Hotel Table: 
+
 • Hotel ID 
+
 • Hotel Name 
+
 • Category ID 
+
 • Chain ID 
+
 • Location 
 
 - The datatypes of the fields in the JSON file are kept as is. For example, property id is kept as 1, instead of "000000001" because it is integer.
@@ -124,6 +135,8 @@ DatabaseConnector test passed
 Testing DataMigrationClass...
 
 DataMigrationClass test passed
+
+Hotel.field_from_id test passed
 
 All tests passed
 

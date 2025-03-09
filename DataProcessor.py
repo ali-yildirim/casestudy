@@ -4,7 +4,6 @@ import json
 import logging
 from DataClasses import Category, Chain, Hotel
 
-# Set up logger
 logger = logging.getLogger(__name__)
 
 class DataProcessorClass:
@@ -38,6 +37,7 @@ class DataProcessorClass:
         
         for item in data:
             try:
+                # check for primary key (primary is a subfield of category)
                 if 'category' in item:
                     # Create Category directly from the 'category' field
                     category = Category.from_dict(item)
@@ -56,6 +56,7 @@ class DataProcessorClass:
         
         for item in data:
             try:
+                # check for primary key (primary is a subfield of chain)
                 if 'chain' in item:
                     # Create Chain directly from the 'chain' field
                     chain = Chain.from_dict(item)
@@ -75,9 +76,10 @@ class DataProcessorClass:
         
         for item in data:
             try:
-                
-                hotel = Hotel.from_dict(item)
-                hotels.append(hotel)
+                # check for primary key
+                if "property_id" in item:
+                    hotel = Hotel.from_dict(item)
+                    hotels.append(hotel)
               
             except KeyError as e:
                 logger.warning(f"Skipping hotel due to missing key: {e}")

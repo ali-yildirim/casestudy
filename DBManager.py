@@ -89,7 +89,18 @@ class DatabaseConnector:
         """
         try:
             for category in categories:
-                # Using INSERT IGNORE to skip existing records without error
+
+                try:
+                    id_val = int(category.id)
+                except ValueError:
+                    logger.error(f"Conversion error from string to integer: {category.id}")
+                    continue
+
+                if id_val < 0:
+                    logger.warning(f"Skipping category with negative id: {category.id}")
+                    continue
+
+                # skip existing records 
                 query = "INSERT IGNORE INTO Category (ID, Name) VALUES (%s, %s)"
                 self.cursor.execute(query, (category.id, category.name))
             self.connection.commit()
@@ -105,7 +116,16 @@ class DatabaseConnector:
         """
         try:
             for chain in chains:
-                # Using INSERT IGNORE to skip existing records without error
+                try:
+                    id_val = int(chain.id)
+                except ValueError:
+                    logger.error(f"Conversion error from string to integer: {chain.id}")
+                    continue
+
+                if id_val < 0:
+                    logger.warning(f"Skipping chain with negative id: {chain.id}")
+                    continue
+                #skip existing records
                 query = "INSERT IGNORE INTO _Chain_ (ID, Name) VALUES (%s, %s)"
                 self.cursor.execute(query, (chain.id, chain.name))
             self.connection.commit()
@@ -120,7 +140,20 @@ class DatabaseConnector:
         Insert hotels into the database
         """
         try:
+            
             for hotel in hotels:
+                try:
+                    chain_id = int(hotel.chain_id)
+                    category_id = int(hotel.category_id)
+                except ValueError:
+                    logger.error(f"Conversion error from string to integer: {chain_id}")
+                    logger.error(f"Conversion error from string to integer: {category_id}")
+                    continue
+
+                if (chain_id < 0) or (category_id < 0):
+                    logger.warning(f"Skipping hotel with negative id: Chain ID:{chain_id} or Category ID:{category_id}")
+                    continue
+
                 query = """
                 INSERT INTO Hotel (ID, Name, Category_ID, Chain_ID, Location) 
                 VALUES (%s, %s, %s, %s, %s)
