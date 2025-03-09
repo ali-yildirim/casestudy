@@ -84,14 +84,14 @@ Hotel Table:
 
 The input file can be treated as a batch. If the code throws an exception during insertion process to the DB, then the entire batch is prevented from being uploaded. This way, consistency can be ensured, and partial data insertion can be prevented.
 
-### Docker Compose
-
+### Mechanisms for Linking
+A class method has been created for linking hotels to their respective categories and chains based on the provided IDs.
 
 ## Implementation
 
 JSON file is read and parsed. Afterwards, field names are used to create objects. Then, DBmanager connects to the database and insert the objects. When done, the connection is closed.
 
-## Missing Parts
+## What is Missing
 
 No unit test for invalid data.
 
