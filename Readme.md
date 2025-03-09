@@ -100,18 +100,31 @@ Then, DBmanager connects to the database.
 * For unit testing:
 
 Testing Object Creation...
+
 Category.from_dict test passed
+
 Chain.from_dict test passed
+
 Hotel.from_dict test passed
+
 Testing DataProcessorClass...
+
 DataProcessorClass.process_json_file test passed
+
 DataProcessorClass.extract_chains test passed
+
 DataProcessorClass.extract_categories test passed
+
 DataProcessorClass.extract_hotels test passed
+
 Testing DatabaseConnector...
+
 DatabaseConnector test passed
+
 Testing DataMigrationClass...
+
 DataMigrationClass test passed
+
 All tests passed
 
 
