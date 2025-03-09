@@ -1,0 +1,56 @@
+
+from dataclasses import dataclass
+from typing import Any, Dict, Optional
+import os
+import json
+
+@dataclass
+class Category:
+    id: str
+    name: str
+    
+    @classmethod
+    def from_dict(cls, data: Dict[str, Any]) -> 'Category':
+        return cls(
+            id=data["category"]["id"],
+            name=data["category"]["name"]
+        )
+
+@dataclass
+class Chain:
+    id: str
+    name: str
+    
+    @classmethod
+    def from_dict(cls, data: Dict[str, Any]) -> 'Chain':
+        return cls(
+            id=data["chain"]["id"],
+            name=data["chain"]["name"]
+        )
+
+@dataclass
+class Hotel:
+    
+    
+    id: int
+    name: str
+    category_id: Optional[int]
+    chain_id: Optional[int]
+    location: str
+    
+    @classmethod
+    def from_dict(cls, data: Dict[str, Any]) -> 'Hotel':
+        
+        if data["location"]["obfuscation_required"] == True:
+            location_str = f"{data['location']['obfuscated_coordinates']['latitude']},{data['location']['obfuscated_coordinates']['longitude']}"
+        else:
+            location_str = f"{data['location']['coordinates']['latitude']},{data['location']['coordinates']['longitude']}"
+        return cls(
+            id=data["property_id"],
+            name=data["name"],
+            category_id=data["category"].get("id"),
+            chain_id=data["chain"].get("id"), 
+            location=location_str
+        )
+
+

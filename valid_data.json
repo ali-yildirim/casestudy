@@ -1,0 +1,13 @@
+{
+    "249": {
+        "property_id": 99999999,
+        "category": {"id": "1", "name": "Test_Category"},
+        "chain": {"id": "0", "name": "Test_Chain"},
+        "location": {
+            "coordinates": {"latitude": 9.072641, "longitude": 7.483794},
+            "obfuscated_coordinates": {"latitude": 9.073178, "longitude": 7.485798},
+            "obfuscation_required": false
+        },
+        "name": "hotel 249"
+    }
+}
