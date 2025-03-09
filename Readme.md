@@ -27,7 +27,7 @@ The project uses requirements.txt files to manage the Python dependencies. The d
 docker-compose up --build
 ```
 
-This command will build the Docker images and start the container for MySQL service
+This command will build the Docker images and start the container for MySQL service.
 
 2. Unit Testing
 
@@ -35,7 +35,7 @@ This command will build the Docker images and start the container for MySQL serv
 docker-compose run app python unittest.py
 ```
 
-This command will run the script necessary for unit testing
+This command will run the script necessary for unit testing.
 
 
 ## Design Decisions
@@ -80,68 +80,16 @@ Hotel Table:
 
 `dataclass` is used in this project due to its ability to streamline the transition from data types to objects. Each class instance represents a database entity (Hotel, Category, Chain) with proper typing and structure.
 
-Benefits of using dataclasses:
-- Automatic generation of special methods like `__init__` and `__repr__`
-- Type annotations for better code readability and IDE support
-- Reduced boilerplate code
-- Built-in data validation capabilities
-
 ### Rollback Mechanism
 
-The input file can be treated as a batch. If the code throws an exception during insertion process to the DB, then the entire batch is prevented from being uploaded. This way, consistency can ensured, and partial data insertion can be prevented.
+The input file can be treated as a batch. If the code throws an exception during insertion process to the DB, then the entire batch is prevented from being uploaded. This way, consistency can be ensured, and partial data insertion can be prevented.
 
 ### Docker Compose
 
 
 ## Implementation
 
-JSON file is read and parsed. Afterwards, field names are used to create objects. 
-
-Then, DBmanager connects to the database.
-
-
-
-
-
-
-
-## Results
-
-
-* For unit testing:
-
-Testing Object Creation...
-
-Category.from_dict test passed
-
-Chain.from_dict test passed
-
-Hotel.from_dict test passed
-
-Testing DataProcessorClass...
-
-DataProcessorClass.process_json_file test passed
-
-DataProcessorClass.extract_chains test passed
-
-DataProcessorClass.extract_categories test passed
-
-DataProcessorClass.extract_hotels test passed
-
-Testing DatabaseConnector...
-
-DatabaseConnector test passed
-
-Testing DataMigrationClass...
-
-DataMigrationClass test passed
-
-Hotel.field_from_id test passed
-
-All tests passed
-
-
-
+JSON file is read and parsed. Afterwards, field names are used to create objects. Then, DBmanager connects to the database and insert the objects. When done, the connection is closed.
 
 ## Missing Parts
 

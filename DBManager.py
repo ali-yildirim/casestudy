@@ -81,7 +81,7 @@ class DatabaseConnector:
             raise
     
     # I rollback when it throws exception so that no partiol insertion is done. Also assumed that this is one batch.
-    # So an error prevents teh batch to be uploaded
+    # So an error prevents a batch from being uploaded
 
     def insert_categories(self, categories: List[Category]):
         """
@@ -146,8 +146,7 @@ class DatabaseConnector:
                     chain_id = int(hotel.chain_id)
                     category_id = int(hotel.category_id)
                 except ValueError:
-                    logger.error(f"Conversion error from string to integer: {chain_id}")
-                    logger.error(f"Conversion error from string to integer: {category_id}")
+                    logger.error(f"Conversion error from string to integer: Chain ID:{chain_id} or Category ID:{category_id}")
                     continue
 
                 if (chain_id < 0) or (category_id < 0):
