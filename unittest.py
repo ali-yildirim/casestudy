@@ -1,5 +1,3 @@
-# test_data_migration.py
-
 from DataMigrationSystem import DataMigrationClass
 from DataProcessor import DataProcessorClass
 from DBManager import DatabaseConnector

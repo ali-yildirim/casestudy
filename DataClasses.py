@@ -1,4 +1,3 @@
-
 from dataclasses import dataclass
 from typing import Any, Dict, Optional
 
@@ -51,9 +50,8 @@ class Hotel:
             location=location_str
         )
 
-
-    @classmethod
-    def field_from_id(cls, chain_id, category_id, cursor):
+    @staticmethod
+    def field_from_id(chain_id, category_id, cursor):
         query = "SELECT name FROM Category WHERE id = %s"
         cursor.execute(query, (category_id,))
         category_name = cursor.fetchone()[0]

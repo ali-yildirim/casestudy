@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) [2024] [Hadid Walizadeh]
+Copyright (c) [2025] [Ali Yıldırım]
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
